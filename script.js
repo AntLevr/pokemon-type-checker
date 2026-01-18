@@ -50,13 +50,14 @@ function update() {
 
   /* ===== 攻击方：对所有属性的倍率 ===== */
   TYPES.forEach(defType => {
-    let mult = 1;
+    let mult = -1;
     selected.forEach(atkType => {
       const row = ATK[atkType];
       if (row && row[defType] != null) {
         mult = Math.max(mult, row[defType]); // 并集
       }
     });
+    if (mult === -1) mult = 1;
     add(atkBox, defType, mult);
   });
 
