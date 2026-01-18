@@ -1,6 +1,6 @@
 body {
-  font-family: sans-serif;
-  background: #f2f2f2;
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
   text-align: center;
 }
 
@@ -13,8 +13,8 @@ button {
   padding: 6px 12px;
   border-radius: 6px;
   border: none;
-  cursor: pointer;
   background: #ddd;
+  cursor: pointer;
 }
 
 button.active {
@@ -22,21 +22,20 @@ button.active {
   color: white;
 }
 
-.panel {
+.results {
   display: flex;
   justify-content: center;
   gap: 40px;
-  margin-top: 20px;
 }
 
-.box {
-  width: 280px;
+.col {
+  width: 320px;
   background: white;
-  padding: 10px;
+  padding: 12px;
   border-radius: 8px;
 }
 
-.box div span {
+.col span {
   display: inline-block;
   margin: 4px;
   padding: 4px 8px;
