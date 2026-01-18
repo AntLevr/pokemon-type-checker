@@ -29,44 +29,59 @@ button.active {
 }
 
 .col {
-  width: 340px;
+  width: 360px;
   background: white;
   padding: 12px;
   border-radius: 8px;
 }
 
-.col span {
-  display: block;
+/* ===== 每一行 ===== */
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin: 6px 0;
-  padding: 6px 10px;
   border-radius: 6px;
-  text-align: left;
-  color: #222;
+  overflow: hidden;
 }
 
-/* ===== 属性颜色 ===== */
-span[data-type="一般"] { background:#A8A878; }
-span[data-type="火"]   { background:#F08030; }
-span[data-type="水"]   { background:#6890F0; }
-span[data-type="草"]   { background:#78C850; }
-span[data-type="电"]   { background:#F8D030; }
-span[data-type="冰"]   { background:#98D8D8; }
-span[data-type="格斗"] { background:#C03028; color:white; }
-span[data-type="毒"]   { background:#A040A0; color:white; }
-span[data-type="地面"] { background:#E0C068; }
-span[data-type="飞行"] { background:#A890F0; }
-span[data-type="超能"] { background:#F85888; }
-span[data-type="虫"]   { background:#A8B820; }
-span[data-type="岩石"] { background:#B8A038; }
-span[data-type="幽灵"] { background:#705898; color:white; }
-span[data-type="龙"]   { background:#7038F8; color:white; }
-span[data-type="恶"]   { background:#705848; color:white; }
-span[data-type="钢"]   { background:#B8B8D0; }
-span[data-type="妖精"] { background:#EE99AC; }
+/* ===== 左：属性 ===== */
+.type {
+  flex: 1;
+  padding: 6px 10px;
+  text-align: left;
+  font-weight: bold;
+}
 
-/* ===== 倍率强调 ===== */
-span[data-mult="4"]   { border-left: 6px solid #8B0000; font-weight: bold; }
-span[data-mult="2"]   { border-left: 6px solid #FF4500; }
-span[data-mult="1"]   { border-left: 6px solid #999; opacity: 0.85; }
-span[data-mult="0.5"] { border-left: 6px solid #2E8B57; }
-span[data-mult="0"]   { border-left: 6px solid #1E90FF; font-weight: bold; }
+/* ===== 右：倍率 ===== */
+.mult {
+  width: 80px;
+  padding: 6px 0;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* ===== 倍率颜色规则 ===== */
+.mult-lt { background: #b71c1c; color: white; } /* <1 红 */
+.mult-eq { background: #ffffff; color: #222; } /* =1 白 */
+.mult-gt { background: #1b5e20; color: white; } /* >1 绿 */
+
+/* ===== 属性颜色 ===== */
+.type[data-type="一般"] { background:#A8A878; }
+.type[data-type="火"]   { background:#F08030; }
+.type[data-type="水"]   { background:#6890F0; }
+.type[data-type="草"]   { background:#78C850; }
+.type[data-type="电"]   { background:#F8D030; }
+.type[data-type="冰"]   { background:#98D8D8; }
+.type[data-type="格斗"] { background:#C03028; color:white; }
+.type[data-type="毒"]   { background:#A040A0; color:white; }
+.type[data-type="地面"] { background:#E0C068; }
+.type[data-type="飞行"] { background:#A890F0; }
+.type[data-type="超能"] { background:#F85888; }
+.type[data-type="虫"]   { background:#A8B820; }
+.type[data-type="岩石"] { background:#B8A038; }
+.type[data-type="幽灵"] { background:#705898; color:white; }
+.type[data-type="龙"]   { background:#7038F8; color:white; }
+.type[data-type="恶"]   { background:#705848; color:white; }
+.type[data-type="钢"]   { background:#B8B8D0; }
+.type[data-type="妖精"] { background:#EE99AC; }
