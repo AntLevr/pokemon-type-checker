@@ -3,7 +3,7 @@ const TYPES = [
   "火","水","草","电","超能","冰","龙","恶","妖精"
 ];
 
-/* 攻击关系表（100% 来自你上传的图） */
+/* 攻击关系表（来自官方属性相性图） */
 const ATK = {
   一般:{岩石:0.5,钢:0.5,幽灵:0},
   格斗:{一般:2,岩石:2,钢:2,冰:2,恶:2,毒:0.5,飞行:0.5,超能:0.5,虫:0.5,妖精:0},
@@ -30,7 +30,7 @@ const btnBox = document.getElementById("buttons");
 const atkBox = document.getElementById("attack");
 const defBox = document.getElementById("defense");
 
-/* 生成按钮 */
+/* 生成属性按钮 */
 TYPES.forEach(t => {
   const b = document.createElement("button");
   b.textContent = t;
@@ -48,26 +48,26 @@ function update() {
 
   if (selected.size === 0) return;
 
-  /* ===== 攻击方：对所有属性的倍率 ===== */
+  /* ===== 攻击方倍率（并集） ===== */
   TYPES.forEach(defType => {
     let mult = -1;
     selected.forEach(atkType => {
       const row = ATK[atkType];
       if (row && row[defType] != null) {
-        mult = Math.max(mult, row[defType]); // 并集
+        mult = Math.max(mult, row[defType]);
       }
     });
     if (mult === -1) mult = 1;
     add(atkBox, defType, mult);
   });
 
-  /* ===== 防御方：受到所有属性攻击的倍率 ===== */
+  /* ===== 防御方倍率（真实倍率） ===== */
   TYPES.forEach(enemyAtk => {
     let mult = 1;
     selected.forEach(myType => {
       const row = ATK[enemyAtk];
       if (row && row[myType] != null) {
-        mult *= row[myType]; // 真实倍率（相乘）
+        mult *= row[myType];
       }
     });
     add(defBox, enemyAtk, mult);
@@ -77,5 +77,7 @@ function update() {
 function add(dom, type, mult) {
   const s = document.createElement("span");
   s.textContent = `${type} ×${mult}`;
+  s.dataset.type = type;
+  s.dataset.mult = mult;
   dom.appendChild(s);
 }
