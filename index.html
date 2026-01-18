@@ -6,22 +6,23 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>宝可梦属性克制查询</h1>
 
-  <div id="typeButtons" class="buttons"></div>
+<h1>宝可梦属性克制查询</h1>
 
-  <div class="results">
-    <div class="result">
-      <h2>克制（攻击）</h2>
-      <div id="attackResult" class="types"></div>
-    </div>
+<div id="buttons" class="buttons"></div>
 
-    <div class="result">
-      <h2>被克制（防御）</h2>
-      <div id="defenseResult" class="types"></div>
-    </div>
+<div class="panel">
+  <div class="box">
+    <h2>克制（攻击）</h2>
+    <div id="attack"></div>
   </div>
 
-  <script src="script.js"></script>
+  <div class="box">
+    <h2>被克制（防御）</h2>
+    <div id="defense"></div>
+  </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
