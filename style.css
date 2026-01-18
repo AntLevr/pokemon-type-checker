@@ -1,11 +1,7 @@
 body {
   font-family: Arial, sans-serif;
-  text-align: center;
   background: #f5f5f5;
-}
-
-h1 {
-  margin-top: 20px;
+  text-align: center;
 }
 
 .buttons {
@@ -20,24 +16,31 @@ button {
   padding: 8px 14px;
   border: none;
   border-radius: 6px;
-  cursor: pointer;
   background: #ddd;
+  cursor: pointer;
 }
 
 button.active {
   background: #4caf50;
-  color: #fff;
+  color: white;
+}
+
+.results {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 20px;
 }
 
 .result {
-  margin: 20px;
+  width: 300px;
 }
 
 .types span {
   display: inline-block;
   margin: 6px;
   padding: 6px 10px;
-  background: #fff;
+  background: white;
   border-radius: 6px;
   box-shadow: 0 0 3px rgba(0,0,0,0.2);
 }
