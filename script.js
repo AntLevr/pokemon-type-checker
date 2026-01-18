@@ -13,15 +13,15 @@ const typeChart = {
   虫: { 攻击: { 草: 2, 超能: 2, 恶: 2 }, 防御: { 火: 2, 飞行: 2, 岩石: 2 } },
   岩石: { 攻击: { 火: 2, 冰: 2, 飞行: 2, 虫: 2 }, 防御: { 水: 2, 草: 2, 格斗: 2, 地面: 2 } },
   幽灵: { 攻击: { 超能: 2, 幽灵: 2 }, 防御: { 幽灵: 2, 恶: 2, 一般: 0, 格斗: 0 } },
-  龙: { 攻击: { 龙: 2 }, 防御: { 冰: 2, 龙: 2, 妖精: 2 } },
+  龙: { 攻击: { 龙: 2 }, 防御: { 冰: 2, 龙: 2, 妖精: 0 } },
   恶: { 攻击: { 超能: 2, 幽灵: 2 }, 防御: { 格斗: 2, 虫: 2, 妖精: 2 } },
   钢: { 攻击: { 冰: 2, 岩石: 2, 妖精: 2 }, 防御: { 火: 2, 格斗: 2, 地面: 2, 毒: 0 } },
   妖精: { 攻击: { 格斗: 2, 龙: 2, 恶: 2 }, 防御: { 毒: 2, 钢: 2, 龙: 0 } }
 };
 
 const buttonsDiv = document.getElementById("typeButtons");
-const attackDiv = document.querySelector("#attackResult .types");
-const defenseDiv = document.querySelector("#defenseResult .types");
+const attackDiv = document.getElementById("attackResult");
+const defenseDiv = document.getElementById("defenseResult");
 
 let selectedTypes = [];
 
@@ -47,26 +47,40 @@ function updateResults() {
   attackDiv.innerHTML = "";
   defenseDiv.innerHTML = "";
 
+  // 攻击：取最大倍率（并集）
   const attackMap = {};
-  const defenseMap = {};
 
   selectedTypes.forEach(type => {
     const atk = typeChart[type].攻击;
-    const def = typeChart[type].防御;
-
     for (let t in atk) {
       attackMap[t] = Math.max(attackMap[t] || 1, atk[t]);
     }
-    for (let t in def) {
-      defenseMap[t] = Math.max(defenseMap[t] || 1, def[t]);
+  });
+
+  render(attackMap, attackDiv);
+
+  // 防御：真实倍率（相乘）
+  const defenseMap = {};
+
+  Object.keys(typeChart).forEach(enemyType => {
+    let multiplier = 1;
+
+    selectedTypes.forEach(myType => {
+      const def = typeChart[myType].防御;
+      if (def[enemyType] !== undefined) {
+        multiplier *= def[enemyType];
+      }
+    });
+
+    if (multiplier !== 1) {
+      defenseMap[enemyType] = multiplier;
     }
   });
 
-  renderMap(attackMap, attackDiv);
-  renderMap(defenseMap, defenseDiv);
+  render(defenseMap, defenseDiv);
 }
 
-function renderMap(map, container) {
+function render(map, container) {
   Object.entries(map)
     .sort((a, b) => b[1] - a[1])
     .forEach(([type, mult]) => {
