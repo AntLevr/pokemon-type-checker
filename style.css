@@ -28,43 +28,41 @@ button.active {
   gap: 40px;
 }
 
-.col {
-  width: 360px;
+.panel {
+  width: 320px;
   background: white;
   padding: 12px;
   border-radius: 8px;
 }
 
-/* ===== 每一行 ===== */
-.row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 6px 0;
-  border-radius: 6px;
-  overflow: hidden;
+/* ===== 表格布局（两列紧靠） ===== */
+.table {
+  display: grid;
+  grid-template-columns: 1fr 80px;
+  row-gap: 6px;
+  margin-top: 10px;
 }
 
-/* ===== 左：属性 ===== */
+/* ===== 左列：属性 ===== */
 .type {
-  flex: 1;
   padding: 6px 10px;
   text-align: left;
   font-weight: bold;
+  border-radius: 6px 0 0 6px;
 }
 
-/* ===== 右：倍率 ===== */
+/* ===== 右列：倍率 ===== */
 .mult {
-  width: 80px;
   padding: 6px 0;
   text-align: center;
   font-weight: bold;
+  border-radius: 0 6px 6px 0;
 }
 
 /* ===== 倍率颜色规则 ===== */
-.mult-lt { background: #b71c1c; color: white; } /* <1 红 */
+.mult-lt { background: #c62828; color: white; } /* <1 红 */
 .mult-eq { background: #ffffff; color: #222; } /* =1 白 */
-.mult-gt { background: #1b5e20; color: white; } /* >1 绿 */
+.mult-gt { background: #2e7d32; color: white; } /* >1 绿 */
 
 /* ===== 属性颜色 ===== */
 .type[data-type="一般"] { background:#A8A878; }
