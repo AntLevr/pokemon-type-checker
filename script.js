@@ -29,6 +29,7 @@ const btnBox = document.getElementById("buttons");
 const atkBox = document.getElementById("attack");
 const defBox = document.getElementById("defense");
 
+/* 生成按钮 */
 TYPES.forEach(t => {
   const b = document.createElement("button");
   b.textContent = t;
@@ -45,6 +46,7 @@ function update() {
   defBox.innerHTML = "";
   if (selected.size === 0) return;
 
+  /* 攻击方（并集） */
   TYPES.forEach(defType => {
     let mult = -1;
     selected.forEach(atkType => {
@@ -54,9 +56,10 @@ function update() {
       }
     });
     if (mult === -1) mult = 1;
-    add(atkBox, defType, mult);
+    addRow(atkBox, defType, mult);
   });
 
+  /* 防御方（乘法） */
   TYPES.forEach(enemyAtk => {
     let mult = 1;
     selected.forEach(myType => {
@@ -65,28 +68,24 @@ function update() {
         mult *= row[myType];
       }
     });
-    add(defBox, enemyAtk, mult);
+    addRow(defBox, enemyAtk, mult);
   });
 }
 
-function add(dom, type, mult) {
-  const row = document.createElement("div");
-  row.className = "row";
+function addRow(dom, type, mult) {
+  const typeDiv = document.createElement("div");
+  typeDiv.className = "type";
+  typeDiv.dataset.type = type;
+  typeDiv.textContent = type;
 
-  const typeBox = document.createElement("div");
-  typeBox.className = "type";
-  typeBox.dataset.type = type;
-  typeBox.textContent = type;
+  const multDiv = document.createElement("div");
+  multDiv.className = "mult";
+  multDiv.textContent = "×" + mult;
 
-  const multBox = document.createElement("div");
-  multBox.className = "mult";
-  multBox.textContent = "×" + mult;
+  if (mult < 1) multDiv.classList.add("mult-lt");
+  else if (mult === 1) multDiv.classList.add("mult-eq");
+  else multDiv.classList.add("mult-gt");
 
-  if (mult < 1) multBox.classList.add("mult-lt");
-  else if (mult === 1) multBox.classList.add("mult-eq");
-  else multBox.classList.add("mult-gt");
-
-  row.appendChild(typeBox);
-  row.appendChild(multBox);
-  dom.appendChild(row);
+  dom.appendChild(typeDiv);
+  dom.appendChild(multDiv);
 }
